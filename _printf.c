@@ -6,14 +6,17 @@
  * Description: a function that produces output according to a format,
  * it can handle format specifiers for strings,integers, characters etc.
  *
- * Returns: the number of characters printed.
+ * Return: the number of characters printed(count).
  */
+int _printf(const char *format, ...);
+
 int _printf(const char *format, ...)
 {
-	int itr count = 0;
+	int itr, count = 0;
 
 	va_list arg_stor;
-	va_start (arg_stor, format);
+
+	va_start(arg_stor, format);
 	for (itr = 0; itr < strlen(format); itr++)
 	{
 		while (*format)
@@ -25,7 +28,7 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == '%')
 			{
-				comb++;
+				format++;
 				if (*format == '%')
 				{
 					_putchar('%');
@@ -33,12 +36,13 @@ int _printf(const char *format, ...)
 				}
 				else if (*format == 'c')
 				{
-					_putchar(va_arg(arg_stor, int);
+					_putchar(va_arg(arg_stor, int));
 					count++;
 				}
 				else if (*format == 's')
 				{
-					char* strg_cp = va_arg(arg_stor, char*);
+					char *strg_cp = va_arg(arg_stor, char*);
+
 					while (*strg_cp)
 					{
 						putchar(*strg_cp);
@@ -54,6 +58,9 @@ int _printf(const char *format, ...)
 			}
 			format++;
 		}
-	va_end (arg_stor);
+	}
+
+	va_end(arg_stor);
+
 	return (count);
 }
