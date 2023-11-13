@@ -12,7 +12,8 @@ int _printf(const char *format, ...);
 
 int _printf(const char *format, ...)
 {
-	int itr, count = 0;
+	size_t itr;
+	int count = 0;
 
 	va_list arg_stor;
 
@@ -43,7 +44,7 @@ int _printf(const char *format, ...)
 				{
 					char *strg_cp = va_arg(arg_stor, char*);
 
-					while (*strg_cp)
+					while (*strg_cp != '\0')
 					{
 						putchar(*strg_cp);
 						count++;
