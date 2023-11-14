@@ -46,9 +46,49 @@ int _printf(const char *format, ...)
 
 					while (*strg_cp != '\0')
 					{
-						putchar(*strg_cp);
+						_putchar(*strg_cp);
 						count++;
 						strg_cp++;
+					}
+				}
+				else if (*format == 'd' || *format == 'i')
+				{
+					int numint = va_arg(arg_stor, int);
+					int num_digits = 0;
+
+					if (numint == 0)
+					{
+						num_digits = 1;
+					}
+					else
+					{
+						int temp_stor = numint;
+
+						while (temp_stor != 0)
+						{
+							temp_stor /= 10;
+							num_digits++;
+						}
+					}
+					if (numint < 0)
+					{
+						_putchar('-');
+						count++;
+						numint = -numint;
+					}
+					while (num_digits > 0)
+					{
+						int div = 1;
+						int x;
+
+						for (x = 1; x < num_digits; x++)
+						{
+							div *= 10;
+						}
+						_putchar(numint / div + '0');
+						count++;
+						numint %= div;
+						num_digits--;
 					}
 				}
 			}
